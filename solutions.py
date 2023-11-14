@@ -2,6 +2,7 @@ import random
 import sys
 import datetime
 import hashlib
+from time import sleep
 
 def main():
     print("Solutions")
@@ -28,13 +29,8 @@ def ex2():
     
 def ex3():
     myList = []
-
-    size = int(input("Enter the number of inputs: "))
-
-    for i in range(0,size):
-        num = int(input("Enter a number: "))
-        myList.append(num)
-
+    myList = input("Enter list of numbers: ").split(",")
+ 
     if myList[0] == myList[-1]:
         print("True")
     else:
@@ -67,7 +63,7 @@ def ex7():
 
     if num < 10:
         print(f"{num}: BOO you loser!")
-    elif num >= 10 and num < 50:
+    elif num > 10 and num < 50:
         print(f"{num}: Try again!")
     else:
         print(f"{num} You win!!")
@@ -76,18 +72,18 @@ def ex8():
     myList = [6,2,7,3,77,7,1]
     smallest = sys.maxsize
     
-    for i in myList:
-        if i < smallest:
-            smallest = i
+    for x in myList:
+        if x < smallest:
+            smallest = x
 
     print(smallest)
 
 def ex9():
-    str = "HELLO"
+    str = input("Enter a string: ")
     print(str.isupper())
     
 def ex10():
-    str = input("please enter a word:").lower()
+    str = input("Enter a word:").lower()
     vowels = 0
     consonants = 0
  
@@ -269,7 +265,97 @@ def ex18():
         else:
             print("You win!")
             break
+def ex19():
+    wordlist = input("Enter a string: ").split(" ")
+    
+    longestLength  = 0
+    for word in wordlist:
+        if len(word) > longestLength:
+            longestLength = len(word)
+
+    print((longestLength + 4)*"*")
+    
+    for word in wordlist:
+        print("* " + word + (longestLength-len(word))*" " + " *")
+
+    print((longestLength + 4)*"*")
+
+def ex20():
+    with open('input-file-20.txt', 'r') as f:
+        words = f.read().replace('\n','').split(' ')
+       
+        wordCounts = {}
+        for word in words:
+            if word not in wordCounts:
+                wordCounts[word] = 1
+            else:
+                wordCounts[word] += 1
+                
+        sortedWords = dict(sorted(wordCounts.items(), key=lambda item: item[1], reverse=True))
+        for k, v in sortedWords.items():
+            print(k + ":"+ str(v))
+
+def ex21():
+    countdown = int(input("Enter countdown (sec): "))
+    if countdown < 0:
+        raise Exception("countdown cannot be negative!!!!!")
+    
+    while countdown > 0:
+        print(str(countdown))
+        sleep(1)
+        countdown -= 1
+    print("Blast off!!!")
+
+def ex22():
+    def convertTextToMorseCode(inputString):
+        textToMorseDict = {
+        'a' : '*-',
+        'b' : '-***',
+        'c' : '-*-*',
+        'd' : '-**',
+        'e' : '*',
+        'f' : '**-*',
+        'g' : '--*',
+        'h' : '****',
+        'i' : '**',
+        'j' : '*---',
+        'k' : '-*-',
+        'l' : '*-**',
+        'm' : '--',
+        'n' : '-*',
+        'o' : '---',
+        'p' : '*--*',
+        'q' : '--*-',
+        'r' : '*-*',
+        's' : '***',
+        't' : '-',
+        'u' : '**-',
+        'v' : '***-',
+        'w' : '*--',
+        'x' : '-**-',
+        'y' : '-*--',
+        'z' : '--**'
+        }
+        morseCode = ""
+        inputString = inputString.lower()
+        for char in inputString:
+            if char == ' ':
+                morseCode += ' '
+            elif char not in textToMorseDict:
+                return None
+            else:
+                morseCode += textToMorseDict[char] + " "
+        return morseCode
         
+    inputString = input("Enter text to Convert to morse code: ")
+    result = convertTextToMorseCode(inputString)
+    if result is None:
+        print("Invalid Input! Please enter a valid character.")
+    else:
+        print("The Morse Code of the entered string is: ",result)
+
+
+       
 if __name__ == "__main__":
     main()
     #ex1()
@@ -289,5 +375,8 @@ if __name__ == "__main__":
     #ex15()
     #ex16()
     #ex17()
-    ex18()
-    
+    #ex18()
+    #ex19()
+    #ex20()
+    #ex21()
+    ex22()

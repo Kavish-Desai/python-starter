@@ -1,0 +1,1 @@
+This is a test input file to count the number of words in this file and their occurence. Lets see how many time each word has appeared in this file.
